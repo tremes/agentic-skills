@@ -51,6 +51,12 @@ require_arg() {
 
 # --- Cluster access ---
 
+SPOKE_ACCESS_DIR=/etc/agentic/spoke-access
+
+if [[ -f "$SPOKE_ACCESS_DIR/kubeconfig" ]]; then
+  export KUBECONFIG="$SPOKE_ACCESS_DIR/kubeconfig"
+fi
+
 check_cluster_access() {
   if ! oc whoami &>/dev/null; then
     error_json "AUTH_FAILED" "Cannot authenticate to cluster" "Run: oc login <cluster-url>"

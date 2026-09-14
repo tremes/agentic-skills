@@ -7,6 +7,7 @@ description: Investigate one or more firing OpenShift alerts to determine root c
 
 - Platform: OpenShift Container Platform (OCP). Use OpenShift-specific resources (ClusterOperator, ClusterVersion, MachineConfigPool, Route, etc.) alongside standard Kubernetes ones.
 - You run commands against the live cluster.
+- For spoke-targeted AgenticRuns, credentials are mounted at `/etc/agentic/spoke-access`. Source `scripts/common.sh` before any raw `oc` command so it exports the mounted `kubeconfig`; all supplied scripts source it automatically. The mounted `thanos-url` identifies the spoke monitoring endpoint. Do not use the hub context or discover the monitoring Route when this mount exists.
 - Available CLIs: oc, kubectl, jq, wget, openssl, skopeo, python3, dig, nslookup, ip, ss, tcpdump, strace
 - Writable directories: /home/agent, /tmp/agent-workspace. The root filesystem is read-only.
 
